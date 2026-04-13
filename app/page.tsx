@@ -14,7 +14,15 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { collection, getCountFromServer, getDocs, limit, query, where, type Timestamp } from "firebase/firestore";
+import {
+  collection,
+  getCountFromServer,
+  getDocs,
+  limit,
+  query,
+  where,
+  type Timestamp,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 type DashboardPreviewItem = {
@@ -30,86 +38,124 @@ export default function Dashboard() {
   const { user, loading } = useAuth();
   const [counts, setCounts] = useState({ tasks: 0, projects: 0, topics: 0 });
   const [previewTasks, setPreviewTasks] = useState<DashboardPreviewItem[]>([]);
-  const [previewTopics, setPreviewTopics] = useState<DashboardPreviewItem[]>([]);
-  const [previewProjects, setPreviewProjects] = useState<DashboardPreviewItem[]>([]);
+  const [previewTopics, setPreviewTopics] = useState<DashboardPreviewItem[]>(
+    [],
+  );
+  const [previewProjects, setPreviewProjects] = useState<
+    DashboardPreviewItem[]
+  >([]);
 
   useEffect(() => {
     if (!user) return;
 
     const fetchDashboardData = async () => {
       try {
-        const [taskSnap, projectSnap, topicSnap, taskDocs, projectDocs, topicDocs] = await Promise.all([
+        const [
+          taskSnap,
+          projectSnap,
+          topicSnap,
+          taskDocs,
+          projectDocs,
+          topicDocs,
+        ] = await Promise.all([
           getCountFromServer(
-            query(collection(db, "normal_tasks"), where("userId", "==", user.uid)),
+            query(
+              collection(db, "normal_tasks"),
+              where("userId", "==", user.uid),
+            ),
           ),
           getCountFromServer(
             query(collection(db, "projects"), where("userId", "==", user.uid)),
           ),
           getCountFromServer(
-            query(collection(db, "learning_topics"), where("userId", "==", user.uid)),
+            query(
+              collection(db, "learning_topics"),
+              where("userId", "==", user.uid),
+            ),
           ),
           getDocs(
-            query(collection(db, "normal_tasks"), where("userId", "==", user.uid), limit(3)),
+            query(
+              collection(db, "normal_tasks"),
+              where("userId", "==", user.uid),
+              limit(3),
+            ),
           ),
           getDocs(
-            query(collection(db, "projects"), where("userId", "==", user.uid), limit(2)),
+            query(
+              collection(db, "projects"),
+              where("userId", "==", user.uid),
+              limit(2),
+            ),
           ),
           getDocs(
-            query(collection(db, "learning_topics"), where("userId", "==", user.uid), limit(2)),
+            query(
+              collection(db, "learning_topics"),
+              where("userId", "==", user.uid),
+              limit(2),
+            ),
           ),
         ]);
 
         const tasks = taskDocs.docs
-          .map((doc) => ({ ...(doc.data() as DashboardPreviewItem), id: doc.id }))
+          .map((doc) => ({
+            ...(doc.data() as DashboardPreviewItem),
+            id: doc.id,
+          }))
           .sort((a, b) => {
             const aTime =
               typeof a.createdAt === "number"
                 ? a.createdAt
                 : typeof a.createdAt === "object" && a.createdAt?.toMillis
-                ? a.createdAt.toMillis()
-                : 0;
+                  ? a.createdAt.toMillis()
+                  : 0;
             const bTime =
               typeof b.createdAt === "number"
                 ? b.createdAt
                 : typeof b.createdAt === "object" && b.createdAt?.toMillis
-                ? b.createdAt.toMillis()
-                : 0;
+                  ? b.createdAt.toMillis()
+                  : 0;
             return bTime - aTime;
           });
 
         const projects = projectDocs.docs
-          .map((doc) => ({ ...(doc.data() as DashboardPreviewItem), id: doc.id }))
+          .map((doc) => ({
+            ...(doc.data() as DashboardPreviewItem),
+            id: doc.id,
+          }))
           .sort((a, b) => {
             const aTime =
               typeof a.createdAt === "number"
                 ? a.createdAt
                 : typeof a.createdAt === "object" && a.createdAt?.toMillis
-                ? a.createdAt.toMillis()
-                : 0;
+                  ? a.createdAt.toMillis()
+                  : 0;
             const bTime =
               typeof b.createdAt === "number"
                 ? b.createdAt
                 : typeof b.createdAt === "object" && b.createdAt?.toMillis
-                ? b.createdAt.toMillis()
-                : 0;
+                  ? b.createdAt.toMillis()
+                  : 0;
             return bTime - aTime;
           });
 
         const topics = topicDocs.docs
-          .map((doc) => ({ ...(doc.data() as DashboardPreviewItem), id: doc.id }))
+          .map((doc) => ({
+            ...(doc.data() as DashboardPreviewItem),
+            id: doc.id,
+          }))
           .sort((a, b) => {
             const aTime =
               typeof a.createdAt === "number"
                 ? a.createdAt
                 : typeof a.createdAt === "object" && a.createdAt?.toMillis
-                ? a.createdAt.toMillis()
-                : 0;
+                  ? a.createdAt.toMillis()
+                  : 0;
             const bTime =
               typeof b.createdAt === "number"
                 ? b.createdAt
                 : typeof b.createdAt === "object" && b.createdAt?.toMillis
-                ? b.createdAt.toMillis()
-                : 0;
+                  ? b.createdAt.toMillis()
+                  : 0;
             return bTime - aTime;
           });
 

@@ -15,16 +15,9 @@ import {
   deleteDoc,
   doc,
   serverTimestamp,
-  orderBy,
+  type Timestamp,
 } from "firebase/firestore";
-import {
-  Plus,
-  Trash2,
-  CheckCircle2,
-  Circle,
-  Loader2,
-  Terminal,
-} from "lucide-react";
+import { Plus, Trash2, Loader2, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -37,7 +30,7 @@ interface Task {
   title: string;
   isComplete: boolean;
   userId: string;
-  createdAt: any;
+  createdAt?: Timestamp | null;
 }
 
 export default function TasksPage() {
@@ -59,15 +52,18 @@ export default function TasksPage() {
       q,
       (snapshot) => {
         const tasksData = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
+          .map(
+            (doc) =>
+              ({
+                id: doc.id,
+                ...(doc.data() as Omit<Task, "id">),
+              }) as Task,
+          )
           .sort((a, b) => {
             const aTime = a.createdAt?.toMillis?.() ?? 0;
             const bTime = b.createdAt?.toMillis?.() ?? 0;
             return bTime - aTime;
-          }) as Task[];
+          });
         setTasks(tasksData);
         setLoading(false);
       },
@@ -233,6 +229,6 @@ export default function TasksPage() {
   );
 }
 
-function cn(...inputs: any[]) {
+function cn(...inputs: Array<string | false | null | undefined>) {
   return inputs.filter(Boolean).join(" ");
 }
