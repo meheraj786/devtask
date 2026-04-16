@@ -64,8 +64,9 @@ export function Navbar() {
               <span className="font-medium">{item.name}</span>
             </Link>
           ))}
-          <InstallButton />
+          
         </nav>
+        <InstallButton />
 
         <div className="p-4 border-t border-border">
           {user ? (
