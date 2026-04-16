@@ -20,6 +20,7 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import InstallButton from "./InstallButton";
 
 export function Navbar() {
   const { user } = useAuth();
@@ -63,6 +64,7 @@ export function Navbar() {
               <span className="font-medium">{item.name}</span>
             </Link>
           ))}
+          <InstallButton />
         </nav>
 
         <div className="p-4 border-t border-border">
