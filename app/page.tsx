@@ -339,7 +339,7 @@ export default function Dashboard() {
                         className="rounded-lg border border-border px-4 py-3 bg-background/80"
                       >
                         <p className="font-medium text-sm">{topic.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="text-xs line-clamp-3 text-muted-foreground mt-1">
                           {topic.description || "No description added yet."}
                         </p>
                       </div>
@@ -375,7 +375,7 @@ export default function Dashboard() {
                         className="rounded-lg border border-border px-4 py-3 bg-background/80"
                       >
                         <p className="font-medium text-sm">{project.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="text-xs line-clamp-3 text-muted-foreground mt-1">
                           {project.description || "No description added yet."}
                         </p>
                       </div>
