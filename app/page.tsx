@@ -24,6 +24,7 @@ import {
   type Timestamp,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import Footer from "@/components/Footer";
 
 type DashboardPreviewItem = {
   id: string;
@@ -397,6 +398,8 @@ export default function Dashboard() {
               </Card>
             </section>
           </div>
+
+        <Footer />
         </main>
       </div>
     </ProtectedRoute>

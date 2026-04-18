@@ -44,6 +44,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface Topic {
   id: string;
@@ -474,6 +475,7 @@ export default function LearningPage() {
               )}
             </AnimatePresence>
           </div>
+          <Footer />
         </main>
       </div>
     </ProtectedRoute>

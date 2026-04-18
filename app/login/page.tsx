@@ -13,6 +13,7 @@ import { useAuth } from "@/components/FirebaseProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import Footer from "@/components/Footer";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -60,6 +61,7 @@ export default function LoginPage() {
   };
 
   return (
+    <>
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-10">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-xl">
         <div className="space-y-4 text-center">
@@ -125,6 +127,9 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
+      
     </div>
+    <Footer />
+    </>
   );
 }

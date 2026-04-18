@@ -52,6 +52,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { format, isPast, isToday } from "date-fns";
+import Footer from "@/components/Footer";
 
 interface Project {
   id: string;
@@ -555,6 +556,7 @@ export default function ProjectsPage() {
               )}
             </AnimatePresence>
           </div>
+          <Footer />
         </main>
       </div>
     </ProtectedRoute>

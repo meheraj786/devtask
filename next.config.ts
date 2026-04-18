@@ -6,7 +6,7 @@ const withPWA = withPWAInit({
   cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
-  disable: process.env.NODE_ENV === "development", 
+  disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     disableDevLogs: true,
   },
@@ -14,6 +14,22 @@ const withPWA = withPWAInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  turbopack: {
+    // rules: {
+    //   "*.svg": [
+    //     {
+    //       condition: "browser",
+    //       loaders: ["@svgr/webpack"],
+    //       as: "*.js",
+    //     },
+    //     {
+    //       condition: { not: "browser" },
+    //       loaders: [require.resolve("./custom-svg-loader.js")],
+    //       as: "*.js",
+    //     },
+    //   ],
+    // },
+  },
 };
 
 export default withPWA(nextConfig);

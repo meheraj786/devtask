@@ -1,12 +1,12 @@
-import type {  Metadata , Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { FirebaseProvider } from "@/components/FirebaseProvider";
+import Footer from "@/components/Footer";
 
-
- const Metadata: Metadata = {
+const Metadata: Metadata = {
   title: "My App",
   description: "Amazing PWA Experience",
   manifest: "/manifest.json",
@@ -53,7 +53,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="@/public/next.svg" />
         <link rel="mask-icon" href="@/public/next.svg" color="#ffffff" />
-        <link rel="icon" href="@/public/next.svg" />
+        <link rel="icon" href="@/public/devtask192.png" sizes="any" />
       </head>
       <body
         suppressHydrationWarning

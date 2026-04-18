@@ -24,6 +24,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
+import Footer from "@/components/Footer";
 
 interface Task {
   id: string;
@@ -223,6 +224,7 @@ export default function TasksPage() {
               )}
             </div>
           </div>
+          <Footer/>
         </main>
       </div>{" "}
     </ProtectedRoute>
